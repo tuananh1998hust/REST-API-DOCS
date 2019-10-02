@@ -1,0 +1,192 @@
+swagger: "2.0"
+info:
+  title: CRUD API
+  description: Simple Swagger With CRUD API
+  version: 1.0.0
+host: localhost:5000
+basePath: /
+schemes:
+  - http
+produces:
+  - application/json
+
+parameters:
+  ID:
+    in: path
+    name: id
+    type: string
+    required: true
+    description: ID
+
+definitions:
+  User:
+    type: object
+    example:
+      {
+        "_id": "5d944980578ed8013772758b",
+        "name": "Tuan Anh",
+        "email": "tuananh1998.hust@gmail.com",
+        "phone": 123456789,
+        "createdAt": "2019-10-02T06:53:52.667Z",
+        "updatedAt": "2019-10-02T06:53:52.667Z",
+        "__v": 0,
+      }
+    required:
+      - name
+      - email
+      - createAt
+      - updateAt
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+      createAt:
+        type: string
+      updateAt:
+        type: string
+
+  Error:
+    type: object
+    example: { error: "Error" }
+    properties:
+      error:
+        type: object
+
+paths:
+  /api/user:
+    get:
+      summary: Returns a list of users.
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            example:
+              {
+                data:
+                  [
+                    {
+                      "_id": "5d944980578ed8013772758b",
+                      "name": "Tuan Anh",
+                      "email": "tuananh1998.hust@gmail.com",
+                      "phone": 123456789,
+                      "createdAt": "2019-10-02T06:53:52.667Z",
+                      "updatedAt": "2019-10-02T06:53:52.667Z",
+                      "__v": 0,
+                    },
+                  ],
+              }
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "#/definitions/User"
+        400:
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/Error"
+
+    post:
+      summary: Create new user
+      parameters:
+        - in: body
+          name: name
+          schema:
+            example:
+              {
+                name: "Tuan Anh",
+                email: "tuananh1998.hust@gmail.com",
+                phone: "123456789",
+              }
+            type: object
+            required:
+              - name
+              - email
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+                uniqueItems: true
+              phone:
+                type: number
+      responses:
+        201:
+          description: Create OK
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/User"
+        400:
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/Error"
+
+  /api/user/{id}:
+    get:
+      summary: Return user match id
+      parameters:
+        - $ref: "#/parameters/ID"
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/User"
+        400:
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Not found
+          schema:
+            $ref: "#/definitions/Error"
+
+    patch:
+      summary: Update User
+      parameters:
+        - $ref: "#/parameters/ID"
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/User"
+        400:
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Not found
+          schema:
+            $ref: "#/definitions/Error"
+
+    delete:
+      summary: Delete User
+      parameters:
+        - $ref: "#/parameters/ID"
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            example: { data: "Delete success" }
+            properties:
+              data:
+                type: string
+        400:
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Not found
+          schema:
+            $ref: "#/definitions/Error"

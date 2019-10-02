@@ -1,0 +1,24 @@
+{
+  "rules": {
+    "consistent-return": "off",
+    "comma-dangle": ["error", "never"],
+    "arrow-parens": "off",
+    "no-shadow": "off",
+    "no-undef": "off",
+    "no-underscore-dangle": "off",
+    "no-else-return": "off",
+    "object-curly-newline": "off",
+    "operator-linebreak": "off",
+    "no-console": "off",
+    "arrow-body-style": "off",
+    "import/no-extraneous-dependencies": "off"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8
+  },
+  "extends": ["airbnb-base"]
+}

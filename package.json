@@ -1,0 +1,32 @@
+{
+  "name": "api-docs-swagger",
+  "version": "1.0.0",
+  "description": "api docs with swagger",
+  "main": "src/index.js",
+  "author": "Tuan Anh <tuananh1998.hust@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "babel-node src/index.js",
+    "dev": "nodemon src/index.js --exec babel-node",
+    "test": "PORT=3001 mocha -t 30000 --exit"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "chai": "^4.2.0",
+    "express": "^4.17.1",
+    "mocha": "^6.2.1",
+    "mongoose": "^5.7.3",
+    "nyc": "^14.1.1",
+    "swagger-ui-express": "3.0.1",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.19.3",
+    "supertest": "^4.0.2"
+  }
+}

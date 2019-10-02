@@ -1,0 +1,29 @@
+version: "3"
+services:
+  server:
+    container_name: server_rest_api
+    build: .
+    command: yarn dev
+    volumes:
+      - .:/app
+    ports:
+      - 5000:5000
+    environment:
+      mongoURI: mongodb://db/restapi
+    depends_on:
+      - db
+    networks:
+      - common
+
+  db:
+    container_name: db
+    image: mongo:4.2.0-bionic
+    volumes:
+      - ./db:/data/db
+    ports:
+      - 27018:27017
+    networks:
+      - common
+
+networks:
+  common:
